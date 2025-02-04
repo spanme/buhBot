@@ -70,12 +70,13 @@ client.on('ready', () => {
     }
     commands === null || commands === void 0 ? void 0 : commands.create({
         name: 'ping',
-        description: 'kissy'
+        description: 'replies with pong.'
     });
 });
 client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!interaction.isCommand())
+    if (!interaction.isCommand()) {
         return;
+    }
     const { commandName, options } = interaction;
     if (commandName === "ping") {
         interaction.reply({

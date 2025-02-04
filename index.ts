@@ -16,20 +16,25 @@ client.on('ready', () => {
     const guildID = '1288246824406224989'
     const guild = client.guilds.cache.get(guildID)
     let commands
+
     if (guild) {
         commands = guild.commands
     } else {
         commands = client.application?.commands
     }
+
     commands?.create({
         name: 'ping',
-        description: 'kissy'
+        description: 'replies with pong.'
     })
+
 })
 
 client.on('interactionCreate', async (interaction) => {
-    if (!interaction.isCommand()) return;
-    const {commandName, options} = interaction;
+    if (!interaction.isCommand()) {
+        return
+    }
+    const { commandName, options } = interaction;
 
     if (commandName === "ping") {
         interaction.reply({
