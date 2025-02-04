@@ -51,9 +51,17 @@ client.on('ready', () => {
     console.log('Ready!!!');
 });
 client.on('messageCreate', (message) => {
-    if (message.content === 'buh') {
+    const content = message.content.toLowerCase();
+    if (message.author.bot)
+        return; //stops bot replying to itself
+    if (content.includes('buh')) {
         message.reply({
             content: 'kissy',
+        });
+    }
+    if (content.includes('kissy')) {
+        message.reply({
+            content: 'buh',
         });
     }
 });
