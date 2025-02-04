@@ -51,7 +51,9 @@ client.on('ready', () => {
 });
 client.on('messageCreate', (message) => {
     if (message.content === 'buh') {
-        message.reply({});
+        message.reply({
+            content: 'kissy',
+        });
     }
 });
 client.login(process.env.TOKEN);

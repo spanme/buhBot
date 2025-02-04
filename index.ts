@@ -17,6 +17,7 @@ client.on('ready', () => {
 client.on('messageCreate', (message) => {
     if (message.content === 'buh') {
         message.reply({
+            content: 'kissy',
         })
     }
 })
