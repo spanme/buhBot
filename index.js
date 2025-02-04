@@ -72,16 +72,43 @@ client.on('ready', () => {
         name: 'bunhouse',
         description: 'the future'
     });
+    const { ApplicationCommandOptionType } = require('discord.js');
+    commands === null || commands === void 0 ? void 0 : commands.create({
+        name: 'add',
+        description: 'Adds two numbers',
+        options: [
+            {
+                name: 'num1',
+                description: 'The first number',
+                required: true,
+                type: ApplicationCommandOptionType.Number,
+            },
+            {
+                name: 'num2',
+                description: 'The second number',
+                required: true,
+                type: ApplicationCommandOptionType.Number,
+            }
+        ]
+    });
 });
 client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0, function* () {
     if (!interaction.isCommand()) {
         return;
     }
     const { commandName, options } = interaction;
+    const i = interaction;
     if (commandName === "bunhouse") {
-        interaction.reply({
+        i.reply({
             content: 'soon',
             //ephemeral: true, for user only messages
+        });
+    }
+    else if (commandName === "add") {
+        const num1 = i.options.getNumber('num1');
+        const num2 = i.options.getNumber('num2');
+        interaction.reply({
+            content: `The sum is: ${num1 + num2}`,
         });
     }
 }));

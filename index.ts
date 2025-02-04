@@ -1,4 +1,4 @@
-import DiscordJS, {GatewayIntentBits} from 'discord.js'
+import DiscordJS, {GatewayIntentBits, chatInputApplicationCommandMention, ChatInputCommandInteraction} from 'discord.js'
 import dotenv from 'dotenv'
 dotenv.config()
 //npm run tsc for java compilation program
@@ -27,6 +27,26 @@ client.on('ready', () => {
         name: 'bunhouse',
         description: 'the future'
     })
+    const { ApplicationCommandOptionType } = require('discord.js');
+    commands?.create({
+        name: 'add',
+        description: 'Adds two numbers',
+
+        options: [
+            {
+                name: 'num1',
+                description: 'The first number',
+                required: true,
+                type: ApplicationCommandOptionType.Number,
+            },
+            {
+                name: 'num2',
+                description: 'The second number',
+                required: true,
+                type: ApplicationCommandOptionType.Number,
+            }
+        ]
+    })
 
 })
 
@@ -35,12 +55,23 @@ client.on('interactionCreate', async (interaction) => {
         return
     }
     const { commandName, options } = interaction;
+    const i = interaction as ChatInputCommandInteraction;
+
 
     if (commandName === "bunhouse") {
-        interaction.reply({
+        i.reply({
             content: 'soon',
             //ephemeral: true, for user only messages
         })
+    } else if (commandName === "add") {
+        const num1 = i.options.getNumber('num1')!
+        const num2 = i.options.getNumber('num2')!
+
+        interaction.reply(
+            {
+                content: `The sum is: ${num1 + num2}`,
+            }
+        )
     }
 })
 
