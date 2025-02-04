@@ -36,10 +36,10 @@ client.on('interactionCreate', async (interaction) => {
     }
     const { commandName, options } = interaction;
 
-    if (commandName === "ping") {
+    if (commandName === "bunhouse") {
         interaction.reply({
-            content: 'pong',
-            ephemeral: true,
+            content: 'soon',
+            //ephemeral: true, for user only messages
         })
     }
 })
