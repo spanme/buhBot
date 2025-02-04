@@ -69,8 +69,8 @@ client.on('ready', () => {
         commands = (_a = client.application) === null || _a === void 0 ? void 0 : _a.commands;
     }
     commands === null || commands === void 0 ? void 0 : commands.create({
-        name: 'ping',
-        description: 'replies with pong.'
+        name: 'bunhouse',
+        description: 'the future'
     });
 });
 client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0, function* () {

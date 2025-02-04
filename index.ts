@@ -24,8 +24,8 @@ client.on('ready', () => {
     }
 
     commands?.create({
-        name: 'ping',
-        description: 'replies with pong.'
+        name: 'bunhouse',
+        description: 'the future'
     })
 
 })
