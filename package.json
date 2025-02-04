@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/spanme/buhBot/issues"
   },
-  "homepage": "https://github.com/spanme/buhBot#readme"
+  "homepage": "https://github.com/spanme/buhBot#readme",
+  "dependencies": {
+    "discord.js": "^14.17.3",
+    "dotenv": "^16.4.7"
+  }
 }
