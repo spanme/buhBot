@@ -39,6 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = __importStar(require("discord.js"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
+//npm run tsc for java compilation program
 const client = new discord_js_1.default.Client({
     intents: [
         discord_js_1.GatewayIntentBits.Guilds,

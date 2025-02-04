@@ -1,7 +1,7 @@
 import DiscordJS, {GatewayIntentBits} from 'discord.js'
 import dotenv from 'dotenv'
 dotenv.config()
-
+//npm run tsc for java compilation program
 const client = new DiscordJS.Client({
     intents: [
         GatewayIntentBits.Guilds,
