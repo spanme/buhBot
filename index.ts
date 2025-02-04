@@ -12,6 +12,31 @@ const client = new DiscordJS.Client({
 
 client.on('ready', () => {
     console.log('Ready!!!')
+
+    const guildID = '1288246824406224989'
+    const guild = client.guilds.cache.get(guildID)
+    let commands
+    if (guild) {
+        commands = guild.commands
+    } else {
+        commands = client.application?.commands
+    }
+    commands?.create({
+        name: 'ping',
+        description: 'kissy'
+    })
+})
+
+client.on('interactionCreate', async (interaction) => {
+    if (!interaction.isCommand()) return;
+    const {commandName, options} = interaction;
+
+    if (commandName === "ping") {
+        interaction.reply({
+            content: 'pong',
+            ephemeral: true,
+        })
+    }
 })
 
 client.on('messageCreate', (message) => {
@@ -43,10 +68,11 @@ client.on('messageCreate', (message) => {
         })
     }
 
-
 })
 
 client.login(process.env.TOKEN)
+
+
 
 
 
