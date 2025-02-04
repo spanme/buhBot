@@ -1,0 +1,20 @@
+{
+  "name": "buhbot",
+  "version": "1.0.0",
+  "description": "back from the ashes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spanme/buhBot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spanme/buhBot/issues"
+  },
+  "homepage": "https://github.com/spanme/buhBot#readme"
+}
