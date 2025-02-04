@@ -11,13 +11,12 @@ const client = new DiscordJS.Client({
 })
 
 client.on('ready', () => {
-    console.log('Ready!')
+    console.log('Ready!!!')
 })
 
 client.on('messageCreate', (message) => {
-    if (message.content === 'ping') {
+    if (message.content === 'buh') {
         message.reply({
-            content: 'pong'
         })
     }
 })
