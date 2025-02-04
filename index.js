@@ -59,6 +59,16 @@ client.on('messageCreate', (message) => {
             content: 'kissy',
         });
     }
+    if (content.includes('alex')) {
+        message.reply({
+            content: 'bunwife',
+        });
+    }
+    if (content.includes('sean')) {
+        message.reply({
+            content: 'husbun',
+        });
+    }
     if (content.includes('kissy')) {
         message.reply({
             content: 'buh',
