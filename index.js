@@ -20,7 +20,7 @@ const client = new discord_js_1.Client({
     partials: [discord_js_1.Partials.Channel]
 });
 client.on('ready', () => {
-    console.log('Ready!!!');
+    console.log('let me change this!!!');
     new wokcommands_1.default({
         client,
         commandsDir: path_1.default.join(__dirname, 'commands'),

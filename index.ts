@@ -16,7 +16,7 @@ const client = new Client({
 });
 
 client.on('ready', () => { //when the bot turns on
-    console.log('Ready!!!')
+    console.log('let me change this!!!')
     new WOK({
         client,
         commandsDir: path.join(__dirname, 'commands'),
