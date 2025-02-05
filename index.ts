@@ -3,8 +3,13 @@ import {Client, IntentsBitField, Message, Partials} from "discord.js";
 import WOK from "wokcommands";
 import path from 'path';
 import dotenv from 'dotenv'
+import { fileURLToPath } from 'url';
 dotenv.config()
 //npm run tsc for java compilation program
+
+const __filename = fileURLToPath(import.meta.url);  // Convert import.meta.url to __filename equivalent
+const __dirname = path.dirname(__filename);
+
 const client = new Client({
     intents: [ //says what i want to listen for
         IntentsBitField.Flags.Guilds,
@@ -16,7 +21,7 @@ const client = new Client({
 });
 
 client.on('ready', () => { //when the bot turns on
-    console.log('let me change this2!!!')
+    console.log('let me change this3!!!')
     new WOK({
         client,
         commandsDir: path.join(__dirname, 'commands'),
