@@ -1,4 +1,6 @@
+"use strict";
 // features/messageListener.ts
+Object.defineProperty(exports, "__esModule", { value: true });
 module.exports = (client, instance) => {
     client.on('messageCreate', (message) => {
         if (message.author.bot)
@@ -26,4 +28,3 @@ module.exports = (client, instance) => {
         }
     });
 };
-export {};

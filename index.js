@@ -1,36 +1,42 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 //import DiscordJS, {GatewayIntentBits, chatInputApplicationCommandMention, ChatInputCommandInteraction} from 'discord.js'
-import { Client, IntentsBitField, Partials } from "discord.js";
-import WOK from "wokcommands";
-import path from 'path';
-require("dotenv/config");
+const discord_js_1 = require("discord.js");
+const wokcommands_1 = __importDefault(require("wokcommands"));
+const path_1 = __importDefault(require("path"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 //npm run tsc for java compilation program
-const client = new Client({
+const client = new discord_js_1.Client({
     intents: [
-        IntentsBitField.Flags.Guilds,
-        IntentsBitField.Flags.GuildMessages,
-        IntentsBitField.Flags.DirectMessages,
-        IntentsBitField.Flags.MessageContent,
+        discord_js_1.IntentsBitField.Flags.Guilds,
+        discord_js_1.IntentsBitField.Flags.GuildMessages,
+        discord_js_1.IntentsBitField.Flags.DirectMessages,
+        discord_js_1.IntentsBitField.Flags.MessageContent,
     ],
-    partials: [Partials.Channel]
+    partials: [discord_js_1.Partials.Channel]
 });
 client.on('ready', () => {
     console.log('Ready!!!');
-    new WOK({
+    new wokcommands_1.default({
         client,
-        commandsDir: path.join(__dirname, 'commands'),
+        commandsDir: path_1.default.join(__dirname, 'commands'),
         //botOwners: [id1, id2] this allows these people to run ownerOnly commands.
         testServers: ["1288246824406224989"], //these commands work on these servers.
         validations: {
-            runtime: path.join(__dirname, 'validations', "runtime"),
-            syntax: path.join(__dirname, 'validations', "syntax"),
+            runtime: path_1.default.join(__dirname, 'validations', "runtime"),
+            syntax: path_1.default.join(__dirname, 'validations', "syntax"),
         },
         events: {
-            dir: path.join(__dirname, "events"),
+            dir: path_1.default.join(__dirname, "events"),
             messageCreate: {
                 isHuman: (message) => !message.author.bot,
             }
         },
-        featuresDir: path.join(__dirname, 'features'),
+        featuresDir: path_1.default.join(__dirname, 'features'),
         cooldownConfig: {
             //generic cooldown
             errorMessage: "Please wait {TIME} before doing that again.",

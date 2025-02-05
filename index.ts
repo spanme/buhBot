@@ -2,7 +2,8 @@
 import {Client, IntentsBitField, Message, Partials} from "discord.js";
 import WOK from "wokcommands";
 import path from 'path';
-require("dotenv/config");
+import dotenv from 'dotenv'
+dotenv.config()
 //npm run tsc for java compilation program
 const client = new Client({
     intents: [ //says what i want to listen for
