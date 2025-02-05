@@ -16,7 +16,7 @@ module.exports = {
     type: wokcommands_1.CommandType.BOTH, // Creates both legacy and slash command
     aliases: ['a'], //allows a diff way of calling command, via legacy
     reply: false, //whether to discord reply or not
-    //testOnly: true, to only work in specified test servers
+    testOnly: true, // to only work in specified test servers
     guildOnly: true, //useable in servers only
     // ownerOnly: true, only whitelisted devs including myself can use this command
     minArgs: 2, //default = 0, but we want 2 to add.

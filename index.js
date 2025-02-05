@@ -24,7 +24,7 @@ client.on('ready', () => {
         client,
         commandsDir: path_1.default.join(__dirname, 'commands'),
         //botOwners: [id1, id2] this allows these people to run ownerOnly commands.
-        //testServers: [id1, id2], these commands work on these servers.
+        testServers: ["1288246824406224989"], //these commands work on these servers.
         validations: {
             runtime: path_1.default.join(__dirname, 'validations', "runtime"),
             syntax: path_1.default.join(__dirname, 'validations', "syntax"),
