@@ -1,29 +1,20 @@
-// features/messageListener.ts
-module.exports = (client, instance) => {
-    client.on('messageCreate', (message) => {
+export default (client) => {
+    client.on("messageCreate", (message) => {
         if (message.author.bot)
-            return; // Don't let the bot reply to itself
+            return; // Ignore bot messages
         const content = message.content.toLowerCase();
-        if (content.includes('buh')) {
-            message.reply({
-                content: 'kissy',
-            });
+        // Responding to "buh", "alex", "sean", and "kissy" (you can expand this logic as needed)
+        if (content.includes("buh")) {
+            message.reply("kissy");
         }
-        if (content.includes('alex')) {
-            message.reply({
-                content: 'bunwife',
-            });
+        else if (content.includes("alex")) {
+            message.reply("bunwife");
         }
-        if (content.includes('sean')) {
-            message.reply({
-                content: 'husbun',
-            });
+        else if (content.includes("sean")) {
+            message.reply("husbun");
         }
-        if (content.includes('kissy')) {
-            message.reply({
-                content: 'buh',
-            });
+        else if (content.includes("kissy")) {
+            message.reply("buh");
         }
     });
 };
-export {};

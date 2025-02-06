@@ -1,9 +1,9 @@
-import { CommandObject, CommandType } from 'wokcommands'
+import { CommandInteraction } from "discord.js";
+
 module.exports = {
-    description: "Ping pong command", //need for slash command
-    type: CommandType.BOTH, //creates legacy and slash command
-    testOnly: true,
-    callback: ({ message }) => { //invoked when user calls ping
-        message?.reply("pong")
-    }
-} as CommandObject
+    name: "ping", // The name of the command (must match the slash command)
+    description: "Ping pong command!", // Description for the command
+    async execute(interaction: CommandInteraction) {
+        await interaction.reply("Pong!");
+    },
+};

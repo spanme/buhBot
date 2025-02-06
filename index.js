@@ -1,13 +1,18 @@
-//import DiscordJS, {GatewayIntentBits, chatInputApplicationCommandMention, ChatInputCommandInteraction} from 'discord.js'
-import { Client, IntentsBitField, Partials } from "discord.js";
-import WOK from "wokcommands";
-import path from 'path';
-import dotenv from 'dotenv';
-import { fileURLToPath } from 'url';
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+import { Client, IntentsBitField } from "discord.js";
+import dotenv from "dotenv";
+import messageListener from "./features/messageListener"; // Import the message listener
+import path from "path";
+import fs from "fs";
 dotenv.config();
-//npm run tsc for java compilation program
-const __filename = fileURLToPath(import.meta.url); // Convert import.meta.url to __filename equivalent
-const __dirname = path.dirname(__filename);
 const client = new Client({
     intents: [
         IntentsBitField.Flags.Guilds,
@@ -15,32 +20,48 @@ const client = new Client({
         IntentsBitField.Flags.DirectMessages,
         IntentsBitField.Flags.MessageContent,
     ],
-    partials: [Partials.Channel]
 });
-client.on('ready', () => {
-    console.log('let me change this3!!!');
-    new WOK({
-        client,
-        commandsDir: path.join(__dirname, 'commands'),
-        //botOwners: [id1, id2] this allows these people to run ownerOnly commands.
-        testServers: ["1288246824406224989"], //these commands work on these servers.
-        validations: {
-            runtime: path.join(__dirname, 'validations', "runtime"),
-            syntax: path.join(__dirname, 'validations', "syntax"),
-        },
-        events: {
-            dir: path.join(__dirname, "events"),
-            messageCreate: {
-                isHuman: (message) => !message.author.bot,
+// Dynamically load all command files from the 'commands' folder
+const commandsPath = path.join(__dirname, "commands");
+const commandFiles = fs.readdirSync(commandsPath).filter((file) => file.endsWith(".ts"));
+client.once("ready", () => {
+    var _a;
+    console.log("Bot is ready!");
+    // Initialize the message listener (not related to commands)
+    messageListener(client);
+    // Register slash commands dynamically when bot is ready
+    const commands = (_a = client.application) === null || _a === void 0 ? void 0 : _a.commands;
+    if (commands) {
+        commandFiles.forEach((file) => {
+            const command = require(path.join(commandsPath, file));
+            if (command && command.name) {
+                commands.create({
+                    name: command.name,
+                    description: command.description,
+                });
             }
-        },
-        featuresDir: path.join(__dirname, 'features'),
-        cooldownConfig: {
-            //generic cooldown
-            errorMessage: "Please wait {TIME} before doing that again.",
-            botOwnersBypass: false,
-            dbRequired: 300, //number of seconds for something??
-        }
-    });
+        });
+    }
 });
-client.login(process.env.TOKEN); //who knows what this does, maybe does exactly what it says.
+// Listen for slash command interactions
+client.on("interactionCreate", (interaction) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!interaction.isCommand())
+        return;
+    const commandName = interaction.commandName;
+    // Find the corresponding command file dynamically
+    const commandFilePath = path.join(commandsPath, `${commandName}.ts`);
+    if (fs.existsSync(commandFilePath)) {
+        const command = require(commandFilePath);
+        try {
+            yield command.execute(interaction);
+        }
+        catch (error) {
+            console.error(error);
+            yield interaction.reply("There was an error while executing this command!");
+        }
+    }
+    else {
+        yield interaction.reply("Command not found.");
+    }
+}));
+client.login(process.env.TOKEN); // Login using the bot token
